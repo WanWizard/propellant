@@ -1,0 +1,17 @@
+{
+	"name": "fuelphp/fuelphp",
+	"description": "The FuelPHP framework, version 2",
+	"keywords": ["framework"],
+	"homepage": "http://fuelphp.com",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "FuelPHP Development Team",
+			"email": "team@fuelphp.com"
+		}
+	],
+	"require": {
+		"php": ">=5.6"
+	},
+	"minimum-stability": "dev"
+}
