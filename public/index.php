@@ -5,7 +5,7 @@
  * @author     Fuel Development Team
  * @license    MIT License
  * @copyright  2015 - 2016 Fuel Development Team
- * @link       http://fuelphp.com
+ * @link       http://fuelphp.org
  */
 
 /**
