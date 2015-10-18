@@ -19,3 +19,5 @@ nbproject
 #
 vendor/*
 composer.lock
+
+tests/_output/*
