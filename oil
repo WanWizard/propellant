@@ -1,0 +1,27 @@
+<?php
+/**
+ * @package    Fuel
+ * @version    2.0
+ * @author     Fuel Development Team
+ * @license    MIT License
+ * @copyright  2015 - 2016 Fuel Development Team
+ * @link       http://fuelphp.org
+ */
+
+/**
+ * Refuse to run oil when called from php-cgi !
+ */
+if (substr(php_sapi_name(), 0, 3) == 'cgi')
+{
+    die("The use of oil is not supported when running php-cgi. Oil needs php-cli to function!\n\n");
+}
+
+/**
+ * Inform the frontloader we want to call the "oil" application
+ */
+putenv('FUEL_APP=oil');
+
+/**
+ * Add load the frontloader
+ */
+require 'public/index.php';

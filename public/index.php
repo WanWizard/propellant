@@ -8,6 +8,8 @@
  * @link       http://fuelphp.org
  */
 
+use Fuel\Foundation\Fuel;
+
 /**
  * Set error reporting and display errors settings.
  * You may want to change these when in production.
@@ -34,14 +36,29 @@ define('VENDORPATH', realpath(__DIR__.'/../vendor/').DIRECTORY_SEPARATOR);
  */
 $autoloader = require VENDORPATH.'autoload.php';
 
+// **************************** [TEST CODE] ********************************
 
+// Manually add paths for test and development code to the autoloader
+$autoloader->addPsr4('Fuel\\Foundation\\', VENDORPATH.'fuelphp/foundation/src');
 
+// **************************** [TEST CODE] ********************************
 
+/**
+ * Initialize the framework
+ */
+Fuel::initialize($autoloader);
 
+/**
+ * Forge the "demo" application
+ */
+Fuel::forge('demo', 'Fuel\\Demo', [], 'development');
 
+/**
+ * Forge the "oil" application
+ */
+Fuel::forge('oil', 'Fuel\\Oil', [], 'development');
 
-
-
-echo "Hello World!<br /><br />";
-
-phpinfo();
+/**
+ * Process the request
+ */
+Fuel::run();
