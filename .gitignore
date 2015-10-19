@@ -20,4 +20,12 @@ nbproject
 vendor/*
 composer.lock
 
+#
+# Codeception files
+#
 tests/_output/*
+
+#
+# Temporary workarounds
+#
+!vendor/fuelv2
