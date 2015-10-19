@@ -1,0 +1,24 @@
+{
+	"name": "fuelphp/demo",
+	"description": "FuelPHP Framework demo application.",
+	"keywords": ["FuelPHP", "application", "demo"],
+	"homepage": "https://github.com/fuelphp/demo",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "FuelPHP Development Team",
+			"email": "team@fuelphp.com"
+		}
+	],
+	"require": {
+		"php": ">=5.6",
+		"codeception/codeception": "*",
+		"codeception/phpbuiltinserver": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"Fuel\\Demo\\": "src/"
+		}
+	},
+	"minimum-stability": "dev"
+}

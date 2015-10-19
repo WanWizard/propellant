@@ -1,0 +1,26 @@
+#
+# temp files from all sorts of editors and IDE's
+#
+*~
+*.bak
+Thumbs.db
+desktop.ini
+.DS_Store
+.buildpath
+.project
+.settings
+*.tmproj
+build
+nbproject
+.idea
+
+#
+# Composer files
+#
+vendor/*
+composer.lock
+
+#
+# Codeception files
+#
+tests/_output/*

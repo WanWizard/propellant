@@ -12,6 +12,7 @@ declare (strict_types=1);
 
 namespace Fuel\Foundation;
 
+use InvalidArgumentException;
 use Composer\Autoload\ClassLoader;
 use \League\BooBoo\Runner as ErrorHandler;
 use \League\BooBoo\Formatter\CommandLineFormatter;
@@ -34,38 +35,66 @@ class Fuel
 	 *
 	 * @since  1.0.0
 	 */
-	const VERSION = '2.0-dev';
+	const VERSION = '2.0.0-dev';
 
 	/**
-	 * Whether or not the framework is initialized
+	 * @var  string  Constant used for when in testing mode
+	 *
+	 * @since  1.0.0
+	 */
+	const TEST = 'test';
+
+	/**
+	 * @var  string  Constant used for when in development
+	 *
+	 * @since  1.0.0
+	 */
+	const DEVELOPMENT = 'development';
+
+	/**
+	 * @var  string  Constant used for when in production
+	 *
+	 * @since  1.0.0
+	 */
+	const PRODUCTION = 'production';
+
+	/**
+	 * @var  string  Constant used for when testing the app in a staging env.
+	 *
+	 * @since  1.0.0
+	 */
+	const STAGING = 'staging';
+
+	/**
+	 * @var  bool  Whether or not the framework is initialized
 	 *
 	 * @since  1.0.0
 	 */
 	protected static $initialized = false;
 
 	/**
-	 * Whether we're running in CLI mode
+	 * @var  bool  Whether we're running in CLI mode
 	 *
 	 * @since  1.0.0
 	 */
 	protected static $isCli = false;
 
 	/**
-	 * Whether we have readline support in CLI mode
+	 * @var  bool  Whether we have readline support in CLI mode
 	 *
 	 * @since  1.0.0
 	 */
 	protected static $readlineSupport = false;
 
 	/**
-	 * Instance of the composer autoloader
+	 * @var  Autoloader  Instance of the composer autoloader
 	 *
 	 * @since  2.0.0
 	 */
 	protected static $autoloader = null;
 
 	/**
-	 * Instance of the global error handler
+	 * @var  ErrorHandler  Instance of the global error handler
 	 *
 	 * @since  2.0.0
 	 */
@@ -125,7 +154,6 @@ class Fuel
 	 * Create a new application instance, the main application component
 	 * or return an already created one
 	 *
-	 * @param  string  name to identify this application
 	 * @param  string  the namespace of the main application component
 	 * @param  array   optionally an array of configuration items
 	 * @param  string  optionally the environment this application component has to run in
@@ -134,9 +162,33 @@ class Fuel
 	 *
 	 * @since  2.0.0
 	 */
-	public static function forge(string $name, string $appNamespace, array $appConfig = [], string $appEnvironment = 'development'): Application
+	public static function forge(string $appNamespace, string $appEnvironment = null): Application
 	{
-		return new Application;
+		// determine the application class to load
+		$class = $appNamespace.'\\Application';
+
+		// check if this namespace exists and defines an application class
+		if ( ! class_exists($class))
+		{
+			// TODO: localize
+			throw new InvalidArgumentException(sprintf('Can not forge this application, namespace "%s" does not define an Application class', $appNamespace));
+		}
+
+		// instantiate
+		$class = new $class;
+
+		// check if this class is a Fuel application class
+		if ( ! $class instanceOf \Fuel\Foundation\Application)
+		{
+			// TODO: localize
+			throw new InvalidArgumentException(sprintf('Can not forge this application, "%s" is not a Fuel Application class', $class));
+		}
+
+		// store the instance
+		static::$applications[$class->getName()] = $class;
+
+		// and return it
+		return $class;
 	}
 
 	/**
@@ -198,6 +250,18 @@ class Fuel
 	public static function getErrorHandler(): ErrorHandler
 	{
 		return static::$errorHandler;
+	}
+
+	/**
+	 * Return the global framework environment
+	 *
+	 * @since  2.0.0
+	 *
+	 * @return  string
+	 */
+	public static function getEnvironment(): string
+	{
+		return (isset($_SERVER['FUEL_ENV']) ? $_SERVER['FUEL_ENV'] : static::DEVELOPMENT);
 	}
 
 	/**

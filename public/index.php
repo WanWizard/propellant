@@ -40,6 +40,8 @@ $autoloader = require VENDORPATH.'autoload.php';
 
 // Manually add paths for test and development code to the autoloader
 $autoloader->addPsr4('Fuel\\Foundation\\', VENDORPATH.'fuelv2/foundation/src');
+$autoloader->addPsr4('Fuel\\Demo\\', VENDORPATH.'fuelv2/demo/src');
+$autoloader->addPsr4('Fuel\\Oil\\', VENDORPATH.'fuelv2/oil/src');
 
 // **************************** [TEST CODE] ********************************
 
@@ -51,14 +53,14 @@ Fuel::initialize($autoloader);
 /**
  * Forge the "demo" application
  */
-Fuel::forge('demo', 'Fuel\\Demo', [], 'development');
+Fuel::forge('Fuel\\Demo');
 
 /**
  * Forge the "oil" application
  */
-Fuel::forge('oil', 'Fuel\\Oil', [], 'development');
+Fuel::forge('Fuel\\Oil', Fuel::PRODUCTION);
 
 /**
- * Process the request
+ * Let's go girls (and boys)!
  */
 Fuel::run();
