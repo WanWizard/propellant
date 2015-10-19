@@ -12,6 +12,10 @@
 	],
 	"require": {
 		"php": ">=5.6",
+		"league/booboo": "dev-master",
+		"monolog/monolog": "1.17.*"
+	},
+	"require-dev": {
 		"codeception/codeception": "*",
 		"codeception/phpbuiltinserver": "*"
 	},
