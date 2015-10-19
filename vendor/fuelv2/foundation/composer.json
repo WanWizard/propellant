@@ -1,0 +1,24 @@
+{
+	"name": "fuelphp/foundation",
+	"description": "FuelPHP Framework foundation library.",
+	"keywords": ["framework"],
+	"homepage": "https://github.com/fuelphp/foundation",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "FuelPHP Development Team",
+			"email": "team@fuelphp.com"
+		}
+	],
+	"require": {
+		"php": ">=5.6",
+		"codeception/codeception": "*",
+		"codeception/phpbuiltinserver": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"Fuel\\Foundation\\": "src/"
+		}
+	},
+	"minimum-stability": "dev"
+}

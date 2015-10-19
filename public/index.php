@@ -39,7 +39,7 @@ $autoloader = require VENDORPATH.'autoload.php';
 // **************************** [TEST CODE] ********************************
 
 // Manually add paths for test and development code to the autoloader
-$autoloader->addPsr4('Fuel\\Foundation\\', VENDORPATH.'fuelphp/foundation/src');
+$autoloader->addPsr4('Fuel\\Foundation\\', VENDORPATH.'fuelv2/foundation/src');
 
 // **************************** [TEST CODE] ********************************
 
